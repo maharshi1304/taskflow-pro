@@ -13,9 +13,9 @@ runner_verify:
 
   script:
     - echo "GitLab Runner is working"
-    - echo "Runner description: $CI_RUNNER_DESCRIPTION"
-    - echo "Project: $CI_PROJECT_PATH"
-    - echo "Branch: $CI_COMMIT_BRANCH"
+    - 'echo "Runner description: $CI_RUNNER_DESCRIPTION"'
+    - 'echo "Project: $CI_PROJECT_PATH"'
+    - 'echo "Branch: $CI_COMMIT_BRANCH"'
     - node --version
     - npm --version
     - cat /etc/os-release
