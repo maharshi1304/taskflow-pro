@@ -6,21 +6,13 @@ runner_verify:
 
   image: docker:27-cli
 
-  services:
-    - name: docker:27-dind
-      alias: docker
-
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-
   tags:
     - docker
     - taskflow
     - aws
 
   script:
-    - echo "Checking Docker-in-Docker access..."
+    - echo "Checking Docker access..."
     - docker version
     - docker info
     - docker ps
