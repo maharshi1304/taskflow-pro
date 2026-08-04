@@ -13,6 +13,7 @@ runner_verify:
 
   script:
     - echo "Checking Docker access..."
+    - unset DOCKER_HOST
     - docker version
     - docker info
     - docker ps
