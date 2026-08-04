@@ -11,6 +11,9 @@ runner_verify:
     - taskflow
     - aws
 
+  variables:
+    DOCKER_HOST: unix:///var/run/docker.sock
+
   script:
     - echo "Checking Docker access..."
     - docker version
