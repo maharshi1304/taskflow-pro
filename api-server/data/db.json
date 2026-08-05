@@ -1,0 +1,68 @@
+{
+  "tasks": [
+    {
+      "id": "AyUaG54y6sk",
+      "title": "Core Java Module 1",
+      "priority": "Medium",
+      "status": "Completed",
+      "dueDate": "2026-07-31"
+    },
+    {
+      "id": "2XW_yBWw1AQ",
+      "title": "OS Module Learning",
+      "priority": "Medium",
+      "status": "Pending",
+      "dueDate": "2026-08-01"
+    },
+    {
+      "id": "TyH3VJPnGCA",
+      "title": "Math",
+      "priority": "Medium",
+      "status": "Pending",
+      "dueDate": "2026-08-01"
+    },
+    {
+      "id": "om6nakIhauk",
+      "title": "English",
+      "priority": "Medium",
+      "status": "Pending",
+      "dueDate": "2026-08-01"
+    },
+    {
+      "title": "social sc",
+      "priority": "Low",
+      "status": "Pending",
+      "dueDate": "2026-08-08",
+      "id": "EdcOIsyp5mU"
+    },
+    {
+      "title": "maths 11",
+      "priority": "Medium",
+      "status": "Pending",
+      "dueDate": "2026-08-02",
+      "id": "Eg9ujMMwigY"
+    },
+    {
+      "title": "englsih 8",
+      "priority": "Low",
+      "status": "Pending",
+      "dueDate": "2026-08-14",
+      "id": "gw6eEmlhNBE"
+    },
+    {
+      "title": "science",
+      "priority": "High",
+      "status": "Pending",
+      "dueDate": "2026-08-08",
+      "id": "MS-_XM4IqJg"
+    },
+    {
+      "title": "Indian Constitution",
+      "priority": "Medium",
+      "status": "Pending",
+      "dueDate": "2026-08-03",
+      "id": "yC66GZ99N4w"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
