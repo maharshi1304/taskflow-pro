@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log*
+.env
+.env.local
+.DS_Store
+
+# Runtime writable database image me copy nahi karni.
+data/db.json

@@ -1,0 +1,26 @@
+{
+  "name": "taskflow-json-api",
+  "version": "1.0.0",
+  "description": "Dockerized JSON Server API for TaskFlow Pro",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "taskflow",
+    "json-server",
+    "rest-api",
+    "docker",
+    "render"
+  ],
+  "author": "Maharshi",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.15"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

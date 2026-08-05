@@ -1,0 +1,19 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Explore TaskFlow Pro",
+      "priority": "High",
+      "status": "Pending",
+      "dueDate": "2026-08-20"
+    },
+    {
+      "title": "Test Render deployment",
+      "priority": "High",
+      "status": "Pending",
+      "dueDate": "2026-08-30",
+      "id": "S8ycO0rlkPo"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
