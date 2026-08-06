@@ -1,16 +1,37 @@
-# React + Vite
+# 🚀 TaskFlow Pro
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern Task Management Application built using React, Vite, Tailwind CSS, Context API and Docker.
 
-Currently, two official plugins are available:
+The application supports complete CRUD operations with a live JSON API, Docker containers, Docker Compose orchestration, GitLab CI/CD pipeline and production deployment.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🌐 Live Demo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Frontend
+https://taskflow-pro-99a6.vercel.app/
 
-## Expanding the Oxlint configuration
+Backend API
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+https://taskflow-json-api.onrender.com/tasks
+
+
+## ✨ Features
+
+- User Login
+- Dashboard
+- Task CRUD
+- Search Tasks
+- Filter Tasks
+- Sort Tasks
+- Priority Management
+- Due Date Tracking
+- Dashboard Statistics
+- CSV Import
+- CSV Export
+- Dark Mode
+- API Status Indicator
+- Docker Support
+- Docker Compose
+- GitLab CI/CD
+- Responsive UI
