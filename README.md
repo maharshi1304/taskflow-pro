@@ -12,7 +12,6 @@ Frontend
 https://taskflow-pro-99a6.vercel.app/
 
 Backend API
-
 https://taskflow-json-api.onrender.com/tasks
 
 
@@ -368,18 +367,22 @@ POST /tasks
 PATCH /tasks/:id
 DELETE /tasks/:id
 
-##Screenshot:
-Home
-<img width="2554" height="1458" alt="image" src="https://github.com/user-attachments/assets/19fbeffd-b995-4ef0-86a7-33cd87ac821e" />
 
-Dark Mode
-<img width="2550" height="1460" alt="image" src="https://github.com/user-attachments/assets/c8016425-1c0c-44d2-9692-73b51c03e81e" />
+## Screenshots
+### Home
+![Home](assets/home.png)
 
-Docker
-<img width="2560" height="1656" alt="image" src="https://github.com/user-attachments/assets/6a12f27d-8fab-4872-8b3d-89856ec513fa" />
+### Dashboard
+![Dashboard](assets/dashboard.png)
 
-GitLab Pipeline
-<img width="2536" height="1454" alt="image" src="https://github.com/user-attachments/assets/63fe3ef1-05a9-4184-810b-af0eda1ae0e7" />
+### Dark Mode
+![Dark Mode](assets/darkmode.png)
+
+### Docker
+![Docker](assets/docker.png)
+
+### GitLab Pipeline
+![GitLab Pipeline](assets/pipeline.png)
 
 
 ## Future Improvement
@@ -404,3 +407,28 @@ Docker
 React
 Vite
 
+=======
+
+https://taskflow-json-api.onrender.com/tasks
+
+
+## ✨ Features
+
+- User Login
+- Dashboard
+- Task CRUD
+- Search Tasks
+- Filter Tasks
+- Sort Tasks
+- Priority Management
+- Due Date Tracking
+- Dashboard Statistics
+- CSV Import
+- CSV Export
+- Dark Mode
+- API Status Indicator
+- Docker Support
+- Docker Compose
+- GitLab CI/CD
+- Responsive UI
+>>>>>>> 306f1e6 (Edit README.md)
