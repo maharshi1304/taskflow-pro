@@ -1,21 +1,328 @@
+# stages:
+#   - verify
+
+# runner_verify:
+#   stage: verify
+
+#   image: docker:27-cli
+
+#   tags:
+#     - docker
+#     - taskflow
+#     - aws
+
+#   variables:
+#     DOCKER_HOST: unix:///var/run/docker.sock
+
+#   script:
+#     - echo "Checking Docker access..."
+#     - docker version
+#     - docker info
+#     - docker ps
+
+
+
+
+# TaskFlow Pro — GitLab CI Verification Pipeline
+
 stages:
-  - verify
+  - install
+  - lint
+  - build
+  - docker_verify
 
-runner_verify:
-  stage: verify
 
-  image: docker:27-cli
+# Common runner configuration
 
+default:
   tags:
     - docker
     - taskflow
     - aws
 
-  variables:
-    DOCKER_HOST: unix:///var/run/docker.sock
+  interruptible: true
+
+  retry:
+    max: 1
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+
+
+# Global variables
+variables:
+  # npm cache project directory ke andar rahegi.
+  NPM_CONFIG_CACHE: "$CI_PROJECT_DIR/.npm"
+
+  # Docker CLI host Docker socket use karegi.
+  DOCKER_HOST: "unix:///var/run/docker.sock"
+
+  # Unique Docker image names.
+  FRONTEND_IMAGE:
+    "taskflow-pro:${CI_COMMIT_SHORT_SHA}"
+
+  API_IMAGE:
+    "taskflow-json-api:${CI_COMMIT_SHORT_SHA}"
+
+
+# npm cache template
+.node_cache:
+  cache:
+    key:
+      files:
+        - package-lock.json
+
+    paths:
+      - .npm/
+
+    policy: pull-push
+
+
+# 1. Install frontend dependencies
+install_frontend_dependencies:
+  stage: install
+
+  image: node:22-alpine
+
+  extends:
+    - .node_cache
 
   script:
-    - echo "Checking Docker access..."
+    - echo "Installing frontend dependencies..."
+    - node --version
+    - npm --version
+    - npm ci --cache .npm --prefer-offline
+
+  artifacts:
+    name:
+      "frontend-dependencies-${CI_COMMIT_SHORT_SHA}"
+
+    paths:
+      - node_modules/
+
+    expire_in: 1 hour
+
+  rules:
+    - if: '$CI_COMMIT_BRANCH'
+
+# 2. Install API dependencies
+install_api_dependencies:
+  stage: install
+
+  image: node:22-alpine
+
+  cache:
+    key:
+      files:
+        - api-server/package-lock.json
+
+    paths:
+      - api-server/.npm/
+
+    policy: pull-push
+
+  script:
+    - echo "Installing API dependencies..."
+    - cd api-server
+    - npm ci --cache .npm --prefer-offline
+
+  artifacts:
+    name:
+      "api-dependencies-${CI_COMMIT_SHORT_SHA}"
+
+    paths:
+      - api-server/node_modules/
+
+    expire_in: 1 hour
+
+  rules:
+    - if: '$CI_COMMIT_BRANCH'
+
+
+# 3. Lint frontend
+lint_frontend:
+  stage: lint
+
+  image: node:22-alpine
+
+  needs:
+    - job: install_frontend_dependencies
+      artifacts: true
+
+  script:
+    - echo "Running frontend lint..."
+    - npm run lint
+
+  rules:
+    - if: '$CI_COMMIT_BRANCH'
+
+
+# 4. Validate API package
+validate_api:
+  stage: lint
+
+  image: node:22-alpine
+
+  needs:
+    - job: install_api_dependencies
+      artifacts: true
+
+  script:
+    - echo "Validating API files..."
+    - test -f api-server/server.js
+    - test -f api-server/package.json
+    - test -f api-server/seed-db.json
+    - node --check api-server/server.js
+    - echo "API source validation passed."
+
+  rules:
+    - if: '$CI_COMMIT_BRANCH'
+
+
+# 5. Build frontend
+  stage: build
+
+  image: node:22-alpine
+
+  needs:
+    - job: install_frontend_dependencies
+      artifacts: true
+    - job: lint_frontend
+
+  script:
+    - echo "Building frontend..."
+    - test -n "$VITE_API_BASE_URL"
+    - npm run build
+    - test -f dist/index.html
+    - test -d dist/assets
+    - echo "Frontend build completed."
+
+  artifacts:
+    name:
+      "taskflow-dist-${CI_COMMIT_SHORT_SHA}"
+
+    paths:
+      - dist/
+
+    expire_in: 7 days
+
+  rules:
+    - if: '$CI_COMMIT_BRANCH'
+
+
+# 6. Verify frontend Docker image
+verify_frontend_docker:
+  stage: docker_verify
+
+  image: docker:27-cli
+
+  needs:
+    - job: build_frontend
+      artifacts: false
+
+  before_script:
+    - echo "Checking Docker daemon..."
     - docker version
     - docker info
-    - docker ps
+
+  script:
+    - echo "Building frontend Docker image..."
+
+    - >
+      docker build
+      --pull
+      --build-arg VITE_API_BASE_URL="$VITE_API_BASE_URL"
+      --tag "$FRONTEND_IMAGE"
+      .
+
+    - export CONTAINER_NAME="taskflow-frontend-${CI_PIPELINE_ID}-${CI_JOB_ID}"
+
+    - echo "Starting frontend verification container..."
+
+    - >
+      docker run
+      --detach
+      --name "$CONTAINER_NAME"
+      "$FRONTEND_IMAGE"
+
+    - sleep 3
+
+    - docker ps --filter "name=$CONTAINER_NAME"
+
+    - docker exec "$CONTAINER_NAME" nginx -t
+
+    - >
+      docker exec "$CONTAINER_NAME"
+      wget
+      --quiet
+      --output-document=-
+      http://127.0.0.1/
+      | grep -q '<div id="root"></div>'
+
+    - echo "Frontend Docker verification passed."
+
+  after_script:
+    - export CONTAINER_NAME="taskflow-frontend-${CI_PIPELINE_ID}-${CI_JOB_ID}"
+    - docker rm --force "$CONTAINER_NAME" 2>/dev/null || true
+    - docker image rm "$FRONTEND_IMAGE" 2>/dev/null || true
+
+  rules:
+    - if: '$CI_COMMIT_BRANCH'
+
+
+# 7. Verify API Docker image
+verify_api_docker:
+  stage: docker_verify
+
+  image: docker:27-cli
+
+  needs:
+    - job: validate_api
+
+  before_script:
+    - echo "Checking Docker daemon..."
+    - docker version
+    - docker info
+
+  script:
+    - echo "Building API Docker image..."
+
+    - >
+      docker build
+      --pull
+      --tag "$API_IMAGE"
+      ./api-server
+
+    - export CONTAINER_NAME="taskflow-api-${CI_PIPELINE_ID}-${CI_JOB_ID}"
+
+    - echo "Starting API verification container..."
+
+    - >
+      docker run
+      --detach
+      --name "$CONTAINER_NAME"
+      "$API_IMAGE"
+
+    - sleep 5
+
+    - docker ps --filter "name=$CONTAINER_NAME"
+
+    - docker logs "$CONTAINER_NAME"
+
+    - >
+      docker exec "$CONTAINER_NAME"
+      wget
+      --quiet
+      --output-document=-
+      http://127.0.0.1:5001/tasks
+      | grep -q '"tasks"\|"title"'
+
+    - echo "API Docker verification passed."
+
+  after_script:
+    - export CONTAINER_NAME="taskflow-api-${CI_PIPELINE_ID}-${CI_JOB_ID}"
+    - docker rm --force "$CONTAINER_NAME" 2>/dev/null || true
+    - docker image rm "$API_IMAGE" 2>/dev/null || true
+
+  rules:
+    - if: '$CI_COMMIT_BRANCH'
