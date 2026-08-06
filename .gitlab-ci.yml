@@ -1,29 +1,6 @@
-# stages:
-#   - verify
-
-# runner_verify:
-#   stage: verify
-
-#   image: docker:27-cli
-
-#   tags:
-#     - docker
-#     - taskflow
-#     - aws
-
-#   variables:
-#     DOCKER_HOST: unix:///var/run/docker.sock
-
-#   script:
-#     - echo "Checking Docker access..."
-#     - docker version
-#     - docker info
-#     - docker ps
-
-
-
-
+# --------------------------------------------------
 # TaskFlow Pro — GitLab CI Verification Pipeline
+# --------------------------------------------------
 
 stages:
   - install
@@ -31,8 +8,9 @@ stages:
   - build
   - docker_verify
 
-
+# --------------------------------------------------
 # Common runner configuration
+# --------------------------------------------------
 
 default:
   tags:
@@ -48,8 +26,10 @@ default:
       - runner_system_failure
       - stuck_or_timeout_failure
 
-
+# --------------------------------------------------
 # Global variables
+# --------------------------------------------------
+
 variables:
   # npm cache project directory ke andar rahegi.
   NPM_CONFIG_CACHE: "$CI_PROJECT_DIR/.npm"
@@ -64,8 +44,10 @@ variables:
   API_IMAGE:
     "taskflow-json-api:${CI_COMMIT_SHORT_SHA}"
 
-
+# --------------------------------------------------
 # npm cache template
+# --------------------------------------------------
+
 .node_cache:
   cache:
     key:
@@ -77,8 +59,10 @@ variables:
 
     policy: pull-push
 
-
+# --------------------------------------------------
 # 1. Install frontend dependencies
+# --------------------------------------------------
+
 install_frontend_dependencies:
   stage: install
 
@@ -105,7 +89,10 @@ install_frontend_dependencies:
   rules:
     - if: '$CI_COMMIT_BRANCH'
 
+# --------------------------------------------------
 # 2. Install API dependencies
+# --------------------------------------------------
+
 install_api_dependencies:
   stage: install
 
@@ -138,8 +125,10 @@ install_api_dependencies:
   rules:
     - if: '$CI_COMMIT_BRANCH'
 
-
+# --------------------------------------------------
 # 3. Lint frontend
+# --------------------------------------------------
+
 lint_frontend:
   stage: lint
 
@@ -156,8 +145,10 @@ lint_frontend:
   rules:
     - if: '$CI_COMMIT_BRANCH'
 
-
+# --------------------------------------------------
 # 4. Validate API package
+# --------------------------------------------------
+
 validate_api:
   stage: lint
 
@@ -178,8 +169,11 @@ validate_api:
   rules:
     - if: '$CI_COMMIT_BRANCH'
 
-
+# --------------------------------------------------
 # 5. Build frontend
+# --------------------------------------------------
+
+build_frontend:
   stage: build
 
   image: node:22-alpine
@@ -209,8 +203,10 @@ validate_api:
   rules:
     - if: '$CI_COMMIT_BRANCH'
 
-
+# --------------------------------------------------
 # 6. Verify frontend Docker image
+# --------------------------------------------------
+
 verify_frontend_docker:
   stage: docker_verify
 
@@ -269,8 +265,10 @@ verify_frontend_docker:
   rules:
     - if: '$CI_COMMIT_BRANCH'
 
-
+# --------------------------------------------------
 # 7. Verify API Docker image
+# --------------------------------------------------
+
 verify_api_docker:
   stage: docker_verify
 
