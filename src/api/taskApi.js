@@ -13,29 +13,29 @@
 import axios from "axios";
 
 /*
-  API URL .env file se receive hoga.
+  Vite environment variable se API URL milega.
 
-  Development URL:
-  http://localhost:5000
+  Local development:
+  http://localhost:5001
+
+  Production:
+  https://your-render-api.onrender.com
 */
 const apiBaseURL =
   import.meta.env.VITE_API_BASE_URL;
 
 /*
-  Agar .env variable missing hai,
-  to development ke time clear warning milegi.
+  Environment variable missing ho to
+  development me clear warning show hogi.
 */
-if (!apiBaseURL) {
+if (!apiBaseURL && import.meta.env.DEV) {
   console.warn(
-    "VITE_API_BASE_URL is missing from the .env file."
+    "VITE_API_BASE_URL is missing. Falling back to http://localhost:5001"
   );
 }
 
 /*
   Common Axios instance.
-
-  Is instance ka use karke hume har request me
-  complete URL likhne ki zarurat nahi padegi.
 */
 const taskApi = axios.create({
   baseURL:
@@ -45,38 +45,39 @@ const taskApi = axios.create({
     "Content-Type": "application/json",
   },
 
-  timeout: 10000,
+  /*
+    Render Free service cold start ko
+    handle karne ke liye 60-second timeout.
+  */
+  timeout: 60000,
 });
 
 /*
-  Request interceptor:
+  Request interceptor.
 
-  Har API request send hone se pehle chalega.
-  Development ke time request inspect karne me useful hai.
+  Request logging sirf development mode me hogi.
 */
 taskApi.interceptors.request.use(
   (config) => {
-    console.log(
-      `API Request: ${config.method?.toUpperCase()} ${config.url}`
-    );
+    if (import.meta.env.DEV) {
+      console.log(
+        `API Request: ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`
+      );
+    }
 
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 /*
-  Response interceptor:
+  Response interceptor.
 
-  Har successful ya failed API response ko
-  centrally handle kar sakte hain.
+  Network aur server errors centrally log honge.
 */
 taskApi.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
+
   (error) => {
     if (!error.response) {
       console.error(
@@ -84,8 +85,7 @@ taskApi.interceptors.response.use(
       );
     } else {
       console.error(
-        "API Error:",
-        error.response.status,
+        `API Error ${error.response.status}:`,
         error.response.data
       );
     }
@@ -95,3 +95,14 @@ taskApi.interceptors.response.use(
 );
 
 export default taskApi;
+
+
+// import axios from "axios";
+
+// const taskApi = axios.create({
+//   baseURL:
+//     import.meta.env.VITE_API_BASE_URL ||
+//     "http://localhost:5001",
+// });
+
+// export default taskApi;
