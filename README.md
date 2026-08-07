@@ -375,15 +375,17 @@ Dark Mode
 Docker
 GitLab Pipeline
 
-## 👨‍💻 Author
-Maharshi
-B.Tech CSE
-Frontend Developer
-DevOps Enthusiast
-GitLab CI/CD
-Docker
-React
-Vite
+## Future Improvement
+1->JWT authentication
+2->Node.js + Express backend
+3->MongoDB database
+4->User accounts
+5->Role-based access
+6->Drag-and-drop Kanban board
+7->Notifications
+8->Pagination
+9->Unit testing
+10->Monitoring and logging
 
 ## 👨‍💻 Author
 Maharshi
@@ -394,3 +396,4 @@ GitLab CI/CD
 Docker
 React
 Vite
+
