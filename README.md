@@ -369,11 +369,22 @@ PATCH /tasks/:id
 DELETE /tasks/:id
 
 ##Screenshot:
-Home
-Dashboard
-Dark Mode
-Docker
-GitLab Pipeline
+## Screenshots
+
+### Home
+![Home](assets/home.png)
+
+### Dashboard
+![Dashboard](assets/dashboard.png)
+
+### Dark Mode
+![Dark Mode](assets/darkmode.png)
+
+### Docker
+![Docker](assets/docker.png)
+
+### GitLab Pipeline
+![GitLab Pipeline](assets/pipeline.png)
 
 ## 👨‍💻 Author
 Maharshi
@@ -385,12 +396,3 @@ Docker
 React
 Vite
 
-## 👨‍💻 Author
-Maharshi
-B.Tech CSE
-Frontend Developer
-DevOps Enthusiast
-GitLab CI/CD
-Docker
-React
-Vite
