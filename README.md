@@ -1,68 +1,102 @@
 # 🚀 TaskFlow Pro
 
-A modern Task Management Application built using React, Vite, Tailwind CSS, Context API and Docker.
+A modern **Task Management Application** built with **React, Vite, Tailwind CSS, Context API, Docker, and GitLab CI/CD**.
 
-The application supports complete CRUD operations with a live JSON API, Docker containers, Docker Compose orchestration, GitLab CI/CD pipeline and production deployment.
+TaskFlow Pro supports complete CRUD operations using a live JSON API, Docker containers, Docker Compose, GitLab CI/CD, and cloud deployment.
 
 ---
 
 ## 🌐 Live Demo
 
-Frontend
+### Frontend
+
 https://taskflow-pro-99a6.vercel.app/
 
-Backend API
+### Backend API
+
 https://taskflow-json-api.onrender.com/tasks
 
+---
 
-## ✨ Features
+# ✨ Features
 
-- User Login
-- Dashboard
-- Task CRUD
-- Search Tasks
-- Filter Tasks
-- Sort Tasks
-- Priority Management
-- Due Date Tracking
-- Dashboard Statistics
-- CSV Import
-- CSV Export
-- Dark Mode
-- API Status Indicator
-- Docker Support
-- Docker Compose
-- GitLab CI/CD
-- Responsive UI
+- ✅ User Login
 
-## 🛠 Tech Stack
+- ✅ Dashboard
 
-Frontend
+- ✅ Task CRUD Operations
+
+- ✅ Search Tasks
+
+- ✅ Filter Tasks
+
+- ✅ Sort Tasks
+
+- ✅ Priority Management
+
+- ✅ Due Date Tracking
+
+- ✅ Dashboard Statistics
+
+- ✅ CSV Import
+
+- ✅ CSV Export
+
+- ✅ Dark Mode
+
+- ✅ API Status Indicator
+
+- ✅ Responsive Design
+
+- ✅ Docker Support
+
+- ✅ Docker Compose
+
+- ✅ GitLab CI/CD Pipeline
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
 
 - React
+
 - Vite
+
 - Tailwind CSS
+
 - React Router
+
 - Axios
+
 - Context API
+
 - React Toastify
 
-Backend
+## Backend
 
 - JSON Server
 
-DevOps
+## DevOps
 
 - Docker
+
 - Docker Compose
+
 - GitLab CI/CD
+
 - GitLab Runner
+
 - AWS EC2
 
-Deployment
+## Deployment
 
 - Vercel
+
 - Render
+
+---
 
 ## 🏗 Project Architecture
 
@@ -287,30 +321,33 @@ React sends requests to the Render JSON API
 Render API performs CRUD operations on task data
 
 
-# Folder Structure:
+# 📁 Project Structure
+
+```
+
 taskflow-pro
 
 │
 
 ├── api-server
 
+├── assets
+
 ├── public
 
 ├── src
 
-│
+│   ├── components
 
-├── components
+│   ├── context
 
-├── pages
+│   ├── hooks
 
-├── context
+│   ├── pages
 
-├── hooks
+│   ├── services
 
-├── utils
-
-├── services
+│   └── utils
 
 │
 
@@ -320,97 +357,140 @@ taskflow-pro
 
 ├── nginx.conf
 
+├── package.json
+
 └── README.md
 
+```
 
-## Installation
+---
+
+# ⚙ Installation
+
 Clone Repository
-git clone <repo>
+
+```bash
+
+git clone <repository-url>
+
 cd taskflow-pro
-Install dependencies
+
+```
+
+Install Dependencies
+
+```bash
+
 npm install
-Run
+
+```
+
+Run Development Server
+
+```bash
+
 npm run dev
 
+```
 
-## Docker
-Frontend
+---
+
+# 🐳 Docker
+
+Build Frontend Image
+
+```bash
 
 docker build -t taskflow-pro .
 
+```
+
+Run Frontend Container
+
+```bash
+
 docker run -p 8080:80 taskflow-pro
 
+```
 
-## Docker Compose:
+---
+
+# 🐳 Docker Compose
+
+```bash
+
 docker compose up -d --build
 
-Frontend
+```
 
+Frontend
+```
 http://localhost:8080
 
+```
+
 Backend
 
+```
 http://localhost:5001/tasks
 
+```
+---
 
-## Deployment:
-Frontend
-Vercel
-Backend
-Render
-CI/CD
-GitLab Runner
+# 🚀 Deployment
 
-## API:
-GET /tasks
-POST /tasks
-PATCH /tasks/:id
-DELETE /tasks/:id
+| Service | Platform |
 
+|----------|----------|
 
-## Screenshots
-### Home
-![Home](assets/home.png)
+| Frontend | Vercel |
 
-### Dashboard
+| Backend | Render |
+
+| CI/CD | GitLab |
+
+| Runner | AWS EC2 |
+
+---
+
+# 🔗 REST API
+
+| Method | Endpoint |
+
+|---------|----------|
+
+| GET | /tasks |
+
+| POST | /tasks |
+
+| PATCH | /tasks/:id |
+
+| DELETE | /tasks/:id |
+
+---
+
+## 📊 Dashboard
+
 ![Dashboard](assets/dashboard.png)
 
-### Dark Mode
+---
+
+## 🌙 Dark Mode
+
 ![Dark Mode](assets/darkmode.png)
 
-### Docker
+---
+
+## 🐳 Docker
+
 ![Docker](assets/docker.png)
 
-### GitLab Pipeline
+---
+
+## ⚙ GitLab Pipeline
 ![GitLab Pipeline](assets/pipeline.png)
 
-
-## Future Improvement
-1->JWT authentication
-2->Node.js + Express backend
-3->MongoDB database
-4->User accounts
-5->Role-based access
-6->Drag-and-drop Kanban board
-7->Notifications
-8->Pagination
-9->Unit testing
-10->Monitoring and logging
-
-## 👨‍💻 Author
-Maharshi
-B.Tech CSE
-Frontend Developer
-DevOps Enthusiast
-GitLab CI/CD
-Docker
-React
-Vite
-
-=======
-
-https://taskflow-json-api.onrender.com/tasks
-
+---
 
 ## ✨ Features
 
@@ -431,4 +511,34 @@ https://taskflow-json-api.onrender.com/tasks
 - Docker Compose
 - GitLab CI/CD
 - Responsive UI
->>>>>>> 306f1e6 (Edit README.md)
+
+
+# 📈 Future Improvements
+
+- JWT Authentication
+- Node.js + Express Backend
+- MongoDB Database
+- User Accounts
+- Role Based Access
+- Kanban Drag & Drop
+- Notifications
+- Pagination
+- Unit Testing
+- Monitoring & Logging
+
+---
+
+# 👨‍💻 Author
+
+**Maharshi**
+
+- B.Tech (Computer Science & Engineering)
+- Frontend Developer
+- DevOps Enthusiast
+- React
+- Docker
+- GitLab CI/CD
+- AWS EC2
+- Vite
+
+---
