@@ -370,10 +370,17 @@ DELETE /tasks/:id
 
 ##Screenshot:
 Home
-Dashboard
+<img width="2554" height="1458" alt="image" src="https://github.com/user-attachments/assets/19fbeffd-b995-4ef0-86a7-33cd87ac821e" />
+
 Dark Mode
+<img width="2550" height="1460" alt="image" src="https://github.com/user-attachments/assets/c8016425-1c0c-44d2-9692-73b51c03e81e" />
+
 Docker
+<img width="2560" height="1656" alt="image" src="https://github.com/user-attachments/assets/6a12f27d-8fab-4872-8b3d-89856ec513fa" />
+
 GitLab Pipeline
+<img width="2536" height="1454" alt="image" src="https://github.com/user-attachments/assets/63fe3ef1-05a9-4184-810b-af0eda1ae0e7" />
+
 
 ## Future Improvement
 1->JWT authentication
