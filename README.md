@@ -1,8 +1,9 @@
-
+# 🚀 TaskFlow Pro
 A modern **Task Management Application** built with **React, Vite, Tailwind CSS, Context API, Docker, and GitLab CI/CD**.
 
 TaskFlow Pro supports complete CRUD operations using a live JSON API, Docker containers, Docker Compose, GitLab CI/CD, and cloud deployment.
 
+## 🌐 Live Demo
 ### Frontend
 https://taskflow-pro-99a6.vercel.app/
 
