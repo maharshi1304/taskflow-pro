@@ -1,33 +1,12 @@
-# React + Vite
 
-<<<<<<< HEAD
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
-
-Currently, two official plugins are available:
-=======
 A modern **Task Management Application** built with **React, Vite, Tailwind CSS, Context API, Docker, and GitLab CI/CD**.
 
 TaskFlow Pro supports complete CRUD operations using a live JSON API, Docker containers, Docker Compose, GitLab CI/CD, and cloud deployment.
->>>>>>> 03f78d6d3c376000b21bfd3224df9a0c3c4aa48c
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-<<<<<<< HEAD
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
-=======
 ### Frontend
-
 https://taskflow-pro-99a6.vercel.app/
 
 ### Backend API
-
 https://taskflow-json-api.onrender.com/tasks
 
 ---
@@ -555,4 +534,3 @@ http://localhost:5001/tasks
 - Vite
 
 ---
->>>>>>> 03f78d6d3c376000b21bfd3224df9a0c3c4aa48c
